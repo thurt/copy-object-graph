@@ -1,0 +1,23 @@
+{
+  "name": "copy-object-graph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "documentation": "cp preface.md README.md && mocha --reporter markdown >> README.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thurt/copy-object-graph.git"
+  },
+  "author": "thurt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thurt/copy-object-graph/issues"
+  },
+  "homepage": "https://github.com/thurt/copy-object-graph#readme",
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
+}
