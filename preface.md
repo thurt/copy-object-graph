@@ -11,7 +11,8 @@ Copy Object Graphs
  - undefined
 
 **Things to be aware of**
-  - Depends on WeakMap for storing self-reference identities
+  - The copy gets references to functions (*not* copies of functions)
+  - There is a dependency on WeakMap for storing self-reference identities
   - Object properties are copied into new objects using `Object.assign({}, original_obj)`. This operation has side effects ~
     - it will activate any getters on the original object
     - the new object will inherit Object prototype
