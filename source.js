@@ -1,12 +1,9 @@
-// @flow
 /*
  Copy Object Graphs
   Source: https://github.com/thurt/copy-object-graph
   Supports: nested/self-referencing objects, nested/self-referencing arrays, numbers, strings, null undefined
 */
-export default function copyObjectGraph(obj: any): any {
-  if (typeof WeakMap !== 'function') throw new ReferenceError('copyObjectGraph requires WeakMap')
-
+export default function copyObjectGraph(obj) {
   const _pool = new WeakMap()
   return cpObj(obj)
 

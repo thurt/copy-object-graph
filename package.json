@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --harmony --compilers js:babel-register",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2",
-    "transpile": "babel ./index.js.flow -o ./index.js",
+    "transpile": "babel ./source.js -o ./index.js",
     "documentation": "cp preface.md README.md && mocha --harmony --compilers js:babel-register --reporter markdown >> README.md",
-    "build": "npm run flow && npm run transpile && npm run test && npm run documentation"
+    "build": "npm run transpile && npm run test && npm run documentation"
   },
   "repository": {
     "type": "git",
@@ -24,7 +23,6 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "babel-plugin-transform-flow-strip-types": "^6.21.0",
     "babel-register": "^6.18.0",
-    "flow-bin": "^0.37.4",
     "mocha": "^2.4.5"
   }
 }

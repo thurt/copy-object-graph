@@ -4,15 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = copyObjectGraph;
-
 /*
  Copy Object Graphs
   Source: https://github.com/thurt/copy-object-graph
   Supports: nested/self-referencing objects, nested/self-referencing arrays, numbers, strings, null undefined
 */
 function copyObjectGraph(obj) {
-  if (typeof WeakMap !== 'function') throw new ReferenceError('copyObjectGraph requires WeakMap');
-
   const _pool = new WeakMap();
   return cpObj(obj);
 
