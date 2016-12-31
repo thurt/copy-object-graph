@@ -1,5 +1,7 @@
-var assert = require('assert')
-var copyObjectGraph = require('../index')
+// @flow
+import { describe, it } from 'mocha'
+import assert from 'assert'
+import copyObjectGraph from '../'
 
 describe('Single Primitives', () => {
   it('returns the same boolean when given a boolean', () => {
@@ -28,29 +30,29 @@ describe('Single Primitives', () => {
 
   if (typeof Symbol === 'function') {
     it('returns the same symbol when given a symbol', () => {
-      var sym = Symbol()
+      const sym = Symbol()
       assert.strictEqual(sym, copyObjectGraph(sym))
     })
   }
 })
 describe('Single-Depth Copy', () => {
   it('returns an array copy when given an array', () => {
-    var arr = []
+    const arr = []
     assert.notStrictEqual(arr, copyObjectGraph(arr))
   })
   it('returns an object copy when given an object', () => {
-    var obj = {}
+    const obj = {}
     assert.notStrictEqual(obj, copyObjectGraph(obj))
   })
 })
 describe('Deep Copy', () => {
   it('returns a deep copy of nested array when given a nested array', () => {
-    var arr = [
+    const arr = [
       [1],
       [[2]],
       [[[3]]]
     ]
-    var res = copyObjectGraph(arr)
+    const res = copyObjectGraph(arr)
 
     assert.notStrictEqual(arr, res)
 
@@ -64,12 +66,12 @@ describe('Deep Copy', () => {
     assert.notStrictEqual(arr[2][0][0], res[2][0][0])
   })
   it('returns a deep copy of nested object when given a nested object', () => {
-    var obj = {
+    const obj = {
       a: { a: 1 },
       b: { b: { b: 2 } },
       c: { c: { c: { c: 3 } } }
     }
-    var res = copyObjectGraph(obj)
+    const res = copyObjectGraph(obj)
 
     assert.notStrictEqual(obj, res)
 
@@ -85,12 +87,12 @@ describe('Deep Copy', () => {
 })
 describe('Self-Referencing Copy', () => {
   it('returns a copy of self-referencing array when given a self-referencing array', () =>{
-    var arr = [1,2,3]
+    const arr: Array<any> = [1,2,3]
     arr[0] = arr // self-reference
 
     assert.strictEqual(arr, arr[0])
 
-    var res = copyObjectGraph(arr)
+    const res = copyObjectGraph(arr)
 
     assert.strictEqual(res, res[0])
 
@@ -98,12 +100,12 @@ describe('Self-Referencing Copy', () => {
     assert.notStrictEqual(arr[0], res[0])
   })
   it('returns a copy of self-referencing object when given a self-referencing object', () => {
-    var obj = { a: {}, b: {}, c: {} }
+    const obj = { a: {}, b: {}, c: {} }
     obj.a = obj // self-reference
 
     assert.strictEqual(obj, obj.a)
 
-    var res = copyObjectGraph(obj)
+    const res = copyObjectGraph(obj)
 
     assert.strictEqual(res, res.a)
 
@@ -113,7 +115,7 @@ describe('Self-Referencing Copy', () => {
 })
 describe('Deep/Self-Referencing Copy', () => {
   it('returns a deep copy of nested/self-referencing array/object when given a nested/self-referencing array/object', () => {
-    var arr = [
+    const arr = [
       {a: [] },
       [{}]
     ]
@@ -123,7 +125,7 @@ describe('Deep/Self-Referencing Copy', () => {
     arr[1][0].b = 2
     assert.strictEqual(arr[0].a[0].b, 2)
 
-    var res = copyObjectGraph(arr)
+    const res = copyObjectGraph(arr)
 
     assert.strictEqual(res[0].a, res[1])
     assert.strictEqual(res[0].a[0].b, 2)
